@@ -20,12 +20,18 @@ class ClientHttpService implements HttpClientI {
   Future<Response> get(
       {required String route, required Map<String, dynamic> headers}) async {
     try {
-      final response = await _client.get(Uri.parse(AppUrlContant.baseUrl),
-          headers: headers.cast<String, String>());
+      final response = await _client.get(
+        Uri.parse(
+          AppUrlContant.baseUrl,
+        ),
+        headers: headers.cast<String, String>(),
+      );
       return response;
     } catch (e) {
       return Response(
-          "{\"data\": null, \"message\": \"Ocorreu um erro interno\"}", 500);
+        "{\"data\": null, \"message\": \"Ocorreu um erro interno\"}",
+        500,
+      );
     }
   }
 }

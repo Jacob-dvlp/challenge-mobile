@@ -1,9 +1,4 @@
-import 'package:frontend_challenge/src/models/releases_move_model.dart';
-import 'package:frontend_challenge/src/repositories/interface/get_moves_i.dart';
-import 'package:frontend_challenge/src/services/interfaces/http_client_i.dart';
-
-import '../../constant/app_url_contant.dart';
-import '../services/clients/http_header_service.dart';
+import 'imports.dart';
 
 class GetMovesRepository implements GetMovesI {
   final HttpClientI httpClientI;
@@ -18,13 +13,16 @@ class GetMovesRepository implements GetMovesI {
         route: AppUrlContant.releaseMoves,
         headers: HttpHeaderService.headers(),
       );
-      if (response.statusCode == 200) {
-        responseModelReleasesMove =
-            responseModelReleasesMoveFromMap(response.body);
+      if (response.statusCode == HttpStatus.ok) {
+        responseModelReleasesMove = responseModelReleasesMoveFromMap(
+          response.body,
+        );
       }
       return responseModelReleasesMove!;
     } catch (e) {
-      return ResponseModelReleasesMove(releases: []);
+      return ResponseModelReleasesMove(
+        releases: [],
+      );
     }
   }
 }

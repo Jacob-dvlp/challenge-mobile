@@ -1,9 +1,4 @@
-import 'package:frontend_challenge/constant/app_url_contant.dart';
-
-import '../models/search_move_model.dart';
-import '../services/clients/http_header_service.dart';
-import '../services/interfaces/http_client_i.dart';
-import 'interface/search_move_i.dart';
+import 'imports.dart';
 
 class SearchMovesRepository implements SearchMoveI {
   final HttpClientI httpClientI;
@@ -18,8 +13,10 @@ class SearchMovesRepository implements SearchMoveI {
         route: "${AppUrlContant.searchMoves}$title",
         headers: HttpHeaderService.headers(),
       );
-      if (response.statusCode == 200) {
-        responseModelSearch = responseModelSearchFromMap(response.body);
+      if (response.statusCode == HttpStatus.ok) {
+        responseModelSearch = responseModelSearchFromMap(
+          response.body,
+        );
       }
       return responseModelSearch!;
     } catch (e) {
