@@ -1,4 +1,5 @@
 import 'imports.dart';
+
 class GetDetailsMoveRepository implements GetDetailsMoveI {
   final HttpClientI httpClientI;
   ResponseModelDetails? responseModelDetails;
@@ -11,6 +12,9 @@ class GetDetailsMoveRepository implements GetDetailsMoveI {
       final response = await httpClientI.get(
         route: AppUrlContant.details(id: id),
         headers: HttpHeaderService.headers(),
+      );
+      print(
+        response.request,
       );
       if (response.statusCode == HttpStatus.ok) {
         responseModelDetails = responseModelDetailsFromMap(

@@ -58,18 +58,18 @@ class ReleaseMove {
   });
 
   factory ReleaseMove.fromMap(Map<String, dynamic> json) => ReleaseMove(
-        id: json["id"],
-        title: json["title"],
-        type: json["type"],
-        imdbId: json["imdb_id"],
-        tmdbId: json["tmdb_id"],
-        tmdbType: json["tmdb_type"],
-        seasonNumber: json["season_number"],
-        posterUrl: json["poster_url"],
+        id: json["id"] ?? 0,
+        title: json["title"] ??"",
+        type: json["type"] ?? "",
+        imdbId: json["imdb_id"] ?? "",
+        tmdbId: json["tmdb_id"] ?? 0,
+        tmdbType: json["tmdb_type"] ?? "",
+        seasonNumber: json["season_number"] ?? 0,
+        posterUrl: json["poster_url"] ?? "",
         sourceReleaseDate: DateTime.parse(json["source_release_date"]),
-        sourceId: json["source_id"],
-        sourceName: json["source_name"],
-        isOriginal: json["is_original"],
+        sourceId: json["source_id"] ?? 0,
+        sourceName: json["source_name"] ?? "",
+        isOriginal: json["is_original"] ?? 0,
       );
 
   Map<String, dynamic> toMap() => {

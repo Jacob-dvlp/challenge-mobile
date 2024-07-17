@@ -14,16 +14,18 @@ final getMoves = Provider<GetMovesI>(
   },
 );
 
-final searchMove = ProviderFamily<SearchMoveI, String>(
-  (ref, arg) {
+final searchMove = Provider(
+  (ref) {
     final client = ref.read(httpClient);
 
     return SearchMovesRepository(httpClientI: client);
   },
 );
 
-final getDetails = ProviderFamily<GetDetailsMoveI, String>(
-  (ref, arg) {
+final getDetails = Provider<GetDetailsMoveI>(
+  (
+    ref,
+  ) {
     final client = ref.read(httpClient);
 
     return GetDetailsMoveRepository(httpClientI: client);

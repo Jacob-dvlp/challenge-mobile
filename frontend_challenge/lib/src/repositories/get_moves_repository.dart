@@ -13,10 +13,13 @@ class GetMovesRepository implements GetMovesI {
         route: AppUrlContant.releaseMoves,
         headers: HttpHeaderService.headers(),
       );
+
       if (response.statusCode == HttpStatus.ok) {
         responseModelReleasesMove = responseModelReleasesMoveFromMap(
           response.body,
         );
+
+        print(responseModelReleasesMove!.releases!.length);
       }
       return responseModelReleasesMove!;
     } catch (e) {

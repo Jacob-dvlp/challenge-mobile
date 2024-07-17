@@ -20,7 +20,7 @@ class ResponseModelDetails {
   final int? tmdbId;
   final String? tmdbType;
   final List<int>? genres;
-  final List<String>? genreNames;
+  List<String>? genreNames = [];
   final double? userRating;
   final int? criticScore;
   final String? usRating;
@@ -65,65 +65,6 @@ class ResponseModelDetails {
     this.trailerThumbnail,
   });
 
-  ResponseModelDetails copyWith({
-    int? id,
-    String? title,
-    String? originalTitle,
-    String? plotOverview,
-    String? type,
-    dynamic runtimeMinutes,
-    int? year,
-    int? endYear,
-    DateTime? releaseDate,
-    String? imdbId,
-    int? tmdbId,
-    String? tmdbType,
-    List<int>? genres,
-    List<String>? genreNames,
-    double? userRating,
-    int? criticScore,
-    String? usRating,
-    String? poster,
-    String? backdrop,
-    String? originalLanguage,
-    List<dynamic>? similarTitles,
-    List<int>? networks,
-    List<String>? networkNames,
-    double? relevancePercentile,
-    double? popularityPercentile,
-    String? trailer,
-    String? trailerThumbnail,
-  }) =>
-      ResponseModelDetails(
-        id: id ?? this.id,
-        title: title ?? this.title,
-        originalTitle: originalTitle ?? this.originalTitle,
-        plotOverview: plotOverview ?? this.plotOverview,
-        type: type ?? this.type,
-        runtimeMinutes: runtimeMinutes ?? this.runtimeMinutes,
-        year: year ?? this.year,
-        endYear: endYear ?? this.endYear,
-        releaseDate: releaseDate ?? this.releaseDate,
-        imdbId: imdbId ?? this.imdbId,
-        tmdbId: tmdbId ?? this.tmdbId,
-        tmdbType: tmdbType ?? this.tmdbType,
-        genres: genres ?? this.genres,
-        genreNames: genreNames ?? this.genreNames,
-        userRating: userRating ?? this.userRating,
-        criticScore: criticScore ?? this.criticScore,
-        usRating: usRating ?? this.usRating,
-        poster: poster ?? this.poster,
-        backdrop: backdrop ?? this.backdrop,
-        originalLanguage: originalLanguage ?? this.originalLanguage,
-        similarTitles: similarTitles ?? this.similarTitles,
-        networks: networks ?? this.networks,
-        networkNames: networkNames ?? this.networkNames,
-        relevancePercentile: relevancePercentile ?? this.relevancePercentile,
-        popularityPercentile: popularityPercentile ?? this.popularityPercentile,
-        trailer: trailer ?? this.trailer,
-        trailerThumbnail: trailerThumbnail ?? this.trailerThumbnail,
-      );
-
   factory ResponseModelDetails.fromMap(Map<String, dynamic> json) =>
       ResponseModelDetails(
         id: json["id"],
@@ -132,14 +73,14 @@ class ResponseModelDetails {
         plotOverview: json["plot_overview"],
         type: json["type"],
         runtimeMinutes: json["runtime_minutes"],
-        year: json["year"],
+        year: json["year"] ?? 00.00,
         endYear: json["end_year"],
         releaseDate: DateTime.parse(json["release_date"]),
         imdbId: json["imdb_id"],
         tmdbId: json["tmdb_id"],
         tmdbType: json["tmdb_type"],
         genres: List<int>.from(json["genres"].map((x) => x)),
-        genreNames: List<String>.from(json["genre_names"].map((x) => x)),
+        genreNames: List<String>.from(json["genre_names"].map((x) => x ?? "")),
         userRating: json["user_rating"]?.toDouble(),
         criticScore: json["critic_score"],
         usRating: json["us_rating"],

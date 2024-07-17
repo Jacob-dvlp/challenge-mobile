@@ -13,3 +13,5 @@ class AppUrlContant {
     return url;
   }
 }
+
+const String introImagBackGround = "assets/img/marvel_Logo.png";

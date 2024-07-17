@@ -22,7 +22,7 @@ class ClientHttpService implements HttpClientI {
     try {
       final response = await _client.get(
         Uri.parse(
-          AppUrlContant.baseUrl,
+         "${AppUrlContant.baseUrl}$route"
         ),
         headers: headers.cast<String, String>(),
       );
