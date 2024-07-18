@@ -2,11 +2,14 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend_challenge/presentation/tabs/home/details/details_page.dart';
 import 'package:frontend_challenge/routes/app_routes.dart';
+import 'package:frontend_challenge/src/models/local_storage_data_model.dart';
 import 'package:frontend_challenge/utils/size_device_utils.dart';
+import 'package:hive_flutter/adapters.dart';
 
-import '../../../../providers/imports.dart';
-import '../../../../src/repositories/imports.dart';
-import '../../../../utils/colors/app_colors.dart';
+import '../../../providers/imports.dart';
+import '../../../src/repositories/imports.dart';
+import '../../../utils/colors/app_colors.dart';
+import '../state/state_controller.dart';
 
 class CustomCardWidget extends ConsumerWidget {
   final ReleaseMove releaseMove;
@@ -22,9 +25,7 @@ class CustomCardWidget extends ConsumerWidget {
       child: GestureDetector(
         onTap: () => AppRoutes.pageWithoutReturn(context,
             page: DetailsPage(
-              title: releaseMove.title,
-              id: releaseMove.id,
-              urlImg: releaseMove.posterUrl,
+              releaseMove: releaseMove,
             )),
         child: Card(
           elevation: 10,
@@ -36,7 +37,7 @@ class CustomCardWidget extends ConsumerWidget {
             child: Stack(
               children: [
                 CachedNetworkImage(
-                    imageUrl: releaseMove.posterUrl,
+                    imageUrl: releaseMove.posterUrl!,
                     imageBuilder: (context, imageProvider) => Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
@@ -52,17 +53,45 @@ class CustomCardWidget extends ConsumerWidget {
                       return const Center(child: Icon(Icons.error));
                     }),
                 Positioned(
-                    right: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: CircleAvatar(
-                        backgroundColor: AppColors.introColorBackGround,
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.favorite_outline_rounded,
-                                color: AppColors.colorWhite)),
-                      ),
-                    )),
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ValueListenableBuilder(
+                      valueListenable: Hive.box(favoriteTable).listenable(),
+                      builder: (context, box, child) {
+                        return CircleAvatar(
+                          backgroundColor: AppColors.introColorBackGround,
+                          child: IconButton(
+                              onPressed: () {
+                                box.get(releaseMove.id.toString()) == null
+                                    ? ref.watch(
+                                        putStorage.call(
+                                          LocalStorageDataModel(
+                                            index: releaseMove.id.toString(),
+                                            data: LocalStorageDataMoveModel(
+                                                id: releaseMove.id.toString(),
+                                                urlImg: releaseMove.posterUrl!,
+                                                title: releaseMove.title!),
+                                          ),
+                                        ),
+                                      )
+                                    : ref.watch(
+                                        removeFavorite.call(
+                                          LocalStorageDataModel(
+                                              index: releaseMove.id.toString()),
+                                        ),
+                                      );
+                              },
+                              icon: box.get(releaseMove.id.toString()) == null
+                                  ? const Icon(Icons.favorite_outline_rounded,
+                                      color: Colors.red)
+                                  : const Icon(Icons.favorite,
+                                      color: Colors.red)),
+                        );
+                      },
+                    ),
+                  ),
+                ),
                 Positioned(
                   bottom: 0,
                   right: 0,
@@ -77,10 +106,8 @@ class CustomCardWidget extends ConsumerWidget {
                     height: 40,
                     child: Center(
                       child: Text(
-                        releaseMove.title,
-                        style: TextStyle(
-                            color: AppColors.colorWhite,
-                            fontWeight: FontWeight.bold),
+                        releaseMove.title!,
+                        style: Theme.of(context).textTheme.titleLarge,
                         textAlign: TextAlign.center,
                       ),
                     ),

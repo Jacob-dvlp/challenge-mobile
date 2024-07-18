@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_challenge/presentation/tabs/home/state_home/state_home.dart';
-import 'package:frontend_challenge/presentation/tabs/home/widget/custom_shimmer_widget.dart';
-import 'package:frontend_challenge/utils/colors/app_colors.dart';
+import 'package:frontend_challenge/presentation/tabs/widget/custom_shimmer_widget.dart';
 
 import '../../../providers/imports.dart';
-import 'widget/custom_card_widget.dart';
+import '../widget/custom_card_widget.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -14,8 +13,11 @@ class HomePage extends ConsumerWidget {
     final state = ref.watch(stateHome);
     return Scaffold(
         appBar: AppBar(
+          title: Text(
+            "Filmes",
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
           automaticallyImplyLeading: false,
-          backgroundColor: AppColors.introColorBackGround,
         ),
         body: state.when(
           data: (data) {
@@ -29,7 +31,9 @@ class HomePage extends ConsumerWidget {
                 ),
                 itemBuilder: (context, index) {
                   final releaseMove = data.releases![index];
-                  return CustomCardWidget(releaseMove: releaseMove);
+                  return CustomCardWidget(
+                    releaseMove: releaseMove,
+                  );
                 },
               ),
             );
@@ -37,7 +41,7 @@ class HomePage extends ConsumerWidget {
           error: (error, stackTrace) => Center(
             child: Text(error.toString()),
           ),
-          loading: () => CustomShimmerWidget(),
+          loading: () => const CustomShimmerWidget(),
         ));
   }
 }

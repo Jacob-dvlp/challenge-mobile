@@ -4,7 +4,9 @@ class GetMovesRepository implements GetMovesI {
   final HttpClientI httpClientI;
   ResponseModelReleasesMove? responseModelReleasesMove;
 
-  GetMovesRepository({required this.httpClientI});
+  GetMovesRepository({
+    required this.httpClientI,
+  });
 
   @override
   Future<ResponseModelReleasesMove> getReleasesMove() async {
@@ -13,13 +15,10 @@ class GetMovesRepository implements GetMovesI {
         route: AppUrlContant.releaseMoves,
         headers: HttpHeaderService.headers(),
       );
-
       if (response.statusCode == HttpStatus.ok) {
         responseModelReleasesMove = responseModelReleasesMoveFromMap(
           response.body,
         );
-
-        print(responseModelReleasesMove!.releases!.length);
       }
       return responseModelReleasesMove!;
     } catch (e) {

@@ -29,37 +29,37 @@ class ResponseModelReleasesMove {
 }
 
 class ReleaseMove {
-  final int id;
-  final String title;
-  final String type;
-  final String imdbId;
-  final int tmdbId;
-  final String tmdbType;
-  final int seasonNumber;
-  final String posterUrl;
-  final DateTime sourceReleaseDate;
-  final int sourceId;
-  final String sourceName;
-  final int isOriginal;
+  final int? id;
+  final String? title;
+  final String? type;
+  final String? imdbId;
+  final int? tmdbId;
+  final String? tmdbType;
+  final int? seasonNumber;
+  final String? posterUrl;
+  final DateTime? sourceReleaseDate;
+  final int? sourceId;
+  final String? sourceName;
+  final int? isOriginal;
 
   ReleaseMove({
     required this.id,
     required this.title,
-    required this.type,
-    required this.imdbId,
-    required this.tmdbId,
-    required this.tmdbType,
-    required this.seasonNumber,
-    required this.posterUrl,
-    required this.sourceReleaseDate,
-    required this.sourceId,
-    required this.sourceName,
-    required this.isOriginal,
+    this.type,
+    this.imdbId,
+    this.tmdbId,
+    this.tmdbType,
+    this.seasonNumber,
+    this.posterUrl,
+    this.sourceReleaseDate,
+    this.sourceId,
+    this.sourceName,
+    this.isOriginal,
   });
 
   factory ReleaseMove.fromMap(Map<String, dynamic> json) => ReleaseMove(
         id: json["id"] ?? 0,
-        title: json["title"] ??"",
+        title: json["title"] ?? "",
         type: json["type"] ?? "",
         imdbId: json["imdb_id"] ?? "",
         tmdbId: json["tmdb_id"] ?? 0,
@@ -82,7 +82,7 @@ class ReleaseMove {
         "season_number": seasonNumber,
         "poster_url": posterUrl,
         "source_release_date":
-            "${sourceReleaseDate.year.toString().padLeft(4, '0')}-${sourceReleaseDate.month.toString().padLeft(2, '0')}-${sourceReleaseDate.day.toString().padLeft(2, '0')}",
+            "${sourceReleaseDate?.year.toString().padLeft(4, '0')}-${sourceReleaseDate?.month.toString().padLeft(2, '0')}-${sourceReleaseDate?.day.toString().padLeft(2, '0')}",
         "source_id": sourceId,
         "source_name": sourceName,
         "is_original": isOriginal,

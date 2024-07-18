@@ -15,3 +15,6 @@ class AppUrlContant {
 }
 
 const String introImagBackGround = "assets/img/marvel_Logo.png";
+
+const favoriteTable = "favorite";
+const movesTable = "moves";
