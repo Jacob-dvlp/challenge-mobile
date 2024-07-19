@@ -8,7 +8,7 @@ Link de apresentação do aplicativo: https://youtu.be/jyRRcCKyVew
 <p> Este aplicativo  tem como objetivo Listar Filmes, Programas de tv e Séries.
 
 ## 📚 Telas do aplicativo.
-
+<br>
  ⚙ --Home: É a tela que lista Filmes com Imagem e o titulo do conteúdo <br>
  ⚙ --Detalhe: É a tela que lista detalhes do Filmes, programa de tv ou série  <br>
  ⚙ --Pesquisar: É a tela que permite ao usúario pesquisar qualquer tipo de filme apenas digitando o titulo no campo de busca.  <br>
@@ -16,7 +16,7 @@ Link de apresentação do aplicativo: https://youtu.be/jyRRcCKyVew
 
 
 ## 📚  FUNCIONALIDADES  
-
+<br> 
  ⚙ -- Dentro do aplicativo é possivel pesquisar qualquer tipo de filme apenas digitando o titulo no campo de pesquisa <br>
  ⚙ -- Dentro do aplicativo é possivel listar os filmes, series e programas de tv <br>
  ⚙ -- Dentro do aplicativo é possivel  favoritar um filme ou desfavoritar ou filme  <br>
@@ -31,7 +31,7 @@ Link de apresentação do aplicativo: https://youtu.be/jyRRcCKyVew
  ⚙ -- Neste  código também foi aplicado  a Persistência de Dados usando o package Hive para armazenar localmente os dados favoritos do usúario. <br>
 
 ## Obs:
- Nesse aplicativo foi usado o gerenciadores de estado Riverpod com a finalidade de  ter a melhor gerencia de (Injeçao de dependencias, gerenciamento de estado) e também o foi usado o package http  para consumir API  que me foi disponibilizado.
+ Nesse aplicativo foi usado o gerenciadores de estado Riverpod com a finalidade de  ter a melhor gerencia de (Injeçao de dependencias, gerenciamento de estado) e também o foi usado o package http  para consumir API  que me foi disponibilizado. <br>
  
 <br>
 ## 🛠 Pacotes utilizados <br>  
