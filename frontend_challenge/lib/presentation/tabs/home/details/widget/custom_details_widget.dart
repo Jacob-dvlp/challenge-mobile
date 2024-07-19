@@ -39,7 +39,6 @@ class CustomDetailsWidget extends StatelessWidget {
                 children: [
                   const Icon(
                     Icons.favorite,
-                    color: Colors.red,
                   ),
                   const SizedBox(
                     width: 10,
@@ -53,7 +52,6 @@ class CustomDetailsWidget extends StatelessWidget {
                     children: [
                       const Icon(
                         Icons.favorite_border_rounded,
-                        color: Colors.white,
                       ),
                       const SizedBox(
                         width: 5,
@@ -121,21 +119,27 @@ class CustomDetailsWidgetImag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = context.sizedDevice.width;
+
     return SizedBox(
       height: context.sizedDevice.height,
-      child: Column(
-        children: [
-          CachedNetworkImage(
-            errorWidget: (context, url, error) => const Center(
-              child: Icon(Icons.error),
+      width: size,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            CachedNetworkImage(
+              errorWidget: (context, url, error) => const Center(
+                child: Icon(Icons.error),
+              ),
+              imageUrl: urlImg,
+              fit: BoxFit.fitWidth,
+              width: size >= sizeWeb ? size / 3.5 : context.sizedDevice.width,
+              placeholder: (context, url) =>
+                  const Center(child: CircularProgressIndicator.adaptive()),
             ),
-            imageUrl: urlImg,
-            fit: BoxFit.fitWidth,
-            width: context.sizedDevice.width,
-            placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator.adaptive()),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

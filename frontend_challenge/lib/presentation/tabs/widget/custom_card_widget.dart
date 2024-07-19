@@ -20,6 +20,8 @@ class CustomCardWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final size = context.sizedDevice.width;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
@@ -28,7 +30,6 @@ class CustomCardWidget extends ConsumerWidget {
               releaseMove: releaseMove,
             )),
         child: Card(
-          elevation: 10,
           shape: UnderlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(10)),
@@ -43,7 +44,7 @@ class CustomCardWidget extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(10),
                             image: DecorationImage(
                               image: imageProvider,
-                              fit: BoxFit.cover,
+                              fit: size == sizeWeb ? BoxFit.fill : BoxFit.cover,
                             ),
                           ),
                         ),
@@ -62,31 +63,34 @@ class CustomCardWidget extends ConsumerWidget {
                         return CircleAvatar(
                           backgroundColor: AppColors.introColorBackGround,
                           child: IconButton(
-                              onPressed: () {
-                                box.get(releaseMove.id.toString()) == null
-                                    ? ref.watch(
-                                        putStorage.call(
-                                          LocalStorageDataModel(
-                                            index: releaseMove.id.toString(),
-                                            data: LocalStorageDataMoveModel(
-                                                id: releaseMove.id.toString(),
-                                                urlImg: releaseMove.posterUrl!,
-                                                title: releaseMove.title!),
-                                          ),
+                            onPressed: () {
+                              box.get(releaseMove.id.toString()) == null
+                                  ? ref.watch(
+                                      putStorage.call(
+                                        LocalStorageDataModel(
+                                          index: releaseMove.id.toString(),
+                                          data: LocalStorageDataMoveModel(
+                                              id: releaseMove.id.toString(),
+                                              urlImg: releaseMove.posterUrl!,
+                                              title: releaseMove.title!),
                                         ),
-                                      )
-                                    : ref.watch(
-                                        removeFavorite.call(
-                                          LocalStorageDataModel(
-                                              index: releaseMove.id.toString()),
-                                        ),
-                                      );
-                              },
-                              icon: box.get(releaseMove.id.toString()) == null
-                                  ? const Icon(Icons.favorite_outline_rounded,
-                                      color: Colors.red)
-                                  : const Icon(Icons.favorite,
-                                      color: Colors.red)),
+                                      ),
+                                    )
+                                  : ref.watch(
+                                      removeFavorite.call(
+                                        LocalStorageDataModel(
+                                            index: releaseMove.id.toString()),
+                                      ),
+                                    );
+                            },
+                            icon: box.get(releaseMove.id.toString()) == null
+                                ? const Icon(
+                                    Icons.favorite_outline_rounded,
+                                  )
+                                : const Icon(
+                                    Icons.favorite,
+                                  ),
+                          ),
                         );
                       },
                     ),

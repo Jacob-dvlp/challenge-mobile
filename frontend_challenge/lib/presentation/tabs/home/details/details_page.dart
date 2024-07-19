@@ -22,7 +22,6 @@ class DetailsPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(stateDetails.call(releaseMove.id.toString()));
     return Scaffold(
-        backgroundColor: AppColors.colorWhite,
         appBar: AppBar(
           backgroundColor: AppColors.introColorBackGround,
           title: Text(

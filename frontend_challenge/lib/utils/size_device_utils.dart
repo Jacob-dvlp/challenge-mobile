@@ -23,10 +23,9 @@ double screenHeightPercentage(BuildContext context, {double percentage = 1}) =>
     screenHeight(context) * percentage;
 double screenWidthPercentage(BuildContext context, {double percentage = 1}) =>
     screenWidth(context) * percentage;
-// //icons
-//PlatformIcons icon( BuildContext context) =>
-//PlatformIcons(context);
 
 extension SizedDevice on BuildContext {
   Size get sizedDevice => MediaQuery.of(this).size;
 }
+
+const int sizeWeb = 1000;

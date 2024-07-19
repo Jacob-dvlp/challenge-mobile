@@ -8,15 +8,22 @@ class CustomShimmerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = context.sizedDevice.width;
     return SizedBox(
         child: GridView.builder(
-      itemCount: 8,
+      itemCount: 17,
       shrinkWrap: true,
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: size >= sizeWeb ? 4 : 2,
+        mainAxisExtent: 250,
+      ),
       itemBuilder: (context, index) => Container(
         alignment: Alignment.center,
-        margin: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+        margin: EdgeInsets.only(
+            left: 15,
+            right: 15,
+            top: size >= sizeWeb ? 3 : 10,
+            bottom: size >= sizeWeb ? 3 : 10),
         child: Shimmer.fromColors(
           baseColor: Colors.grey.shade200,
           highlightColor: AppColors.colorWhite,

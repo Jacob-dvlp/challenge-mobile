@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:frontend_challenge/presentation/tabs/widget/custom_card_widget.dart';
+import 'package:frontend_challenge/utils/size_device_utils.dart';
 
 import '../../../providers/imports.dart';
 import '../../../src/models/local_storage_data_model.dart';
@@ -14,6 +15,8 @@ class FavoritePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final localStorage = ref.watch(getDataLocalStorage);
+    final size = context.sizedDevice.width;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -35,9 +38,8 @@ class FavoritePage extends ConsumerWidget {
               ? SizedBox(
                   child: GridView.builder(
                     itemCount: localStorage.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: size >= sizeWeb ? 3 : 2,
                       mainAxisSpacing: 2,
                       mainAxisExtent: 250,
                     ),

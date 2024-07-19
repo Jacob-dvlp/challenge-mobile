@@ -12,7 +12,6 @@ Future<void> main() async {
 
   await Hive.initFlutter();
   await Hive.openBox(favoriteTable);
-  await Hive.openBox(movesTable);
 
   runApp(
     const ProviderScope(
@@ -27,28 +26,8 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.introColorBackGround,
-        scrollbarTheme: const ScrollbarThemeData(),
-        textTheme: TextTheme(
-            bodyMedium: const TextStyle(color: Colors.white, fontSize: 15),
-            titleMedium: TextStyle(color: AppColors.colorWhite),
-            titleLarge: TextStyle(
-              color: AppColors.colorWhite,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            )),
-        appBarTheme: AppBarTheme(color: AppColors.introColorBackGround),
-        iconTheme: const IconThemeData(
-          color: Color(0xFFF44336),
-        ),
-        iconButtonTheme: IconButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor:
-                WidgetStatePropertyAll(AppColors.introColorBackGround),
-          ),
-        ),
-      ),
+      themeMode: ThemeMode.system,
+      theme: AppColors.themeData,
       debugShowCheckedModeBanner: false,
       home: const IntroPage(),
     );

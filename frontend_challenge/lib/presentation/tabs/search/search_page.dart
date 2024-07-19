@@ -6,7 +6,10 @@ import 'package:frontend_challenge/routes/app_routes.dart';
 import 'package:frontend_challenge/src/repositories/imports.dart';
 import 'package:frontend_challenge/utils/colors/app_colors.dart';
 import 'package:frontend_challenge/utils/size_device_utils.dart';
+import 'package:hive_flutter/adapters.dart';
 
+import '../../../src/models/local_storage_data_model.dart';
+import '../state/state_controller.dart';
 import '../widget/custom_shimmer_widget.dart';
 import 'state_search/state_search.dart';
 
@@ -203,9 +206,59 @@ class SearchPage extends ConsumerWidget {
                                               ],
                                             ),
                                           ),
-                                          IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(Icons.favorite))
+                                          ValueListenableBuilder(
+                                            valueListenable:
+                                                Hive.box(favoriteTable)
+                                                    .listenable(),
+                                            builder: (context, box, child) {
+                                              return CircleAvatar(
+                                                backgroundColor: AppColors
+                                                    .introColorBackGround,
+                                                child: IconButton(
+                                                  onPressed: () {
+                                                    box.get(searchData.id
+                                                                .toString()) ==
+                                                            null
+                                                        ? ref.watch(
+                                                            putStorage.call(
+                                                              LocalStorageDataModel(
+                                                                index: searchData
+                                                                    .id
+                                                                    .toString(),
+                                                                data: LocalStorageDataMoveModel(
+                                                                    id: searchData
+                                                                        .id
+                                                                        .toString(),
+                                                                    urlImg: searchData
+                                                                        .imageUrl,
+                                                                    title: searchData
+                                                                        .name),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        : ref.watch(
+                                                            removeFavorite.call(
+                                                              LocalStorageDataModel(
+                                                                  index: searchData
+                                                                      .id
+                                                                      .toString()),
+                                                            ),
+                                                          );
+                                                  },
+                                                  icon: box.get(searchData.id
+                                                              .toString()) ==
+                                                          null
+                                                      ? const Icon(
+                                                          Icons
+                                                              .favorite_outline_rounded,
+                                                        )
+                                                      : const Icon(
+                                                          Icons.favorite,
+                                                        ),
+                                                ),
+                                              );
+                                            },
+                                          ),
                                         ],
                                       ),
                                     )),

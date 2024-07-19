@@ -14,9 +14,8 @@ class CustomBtnItemMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        width: isEnable! ? 100 : 30,
+      child: Container(
+        width: 100,
         height: 40,
         padding: const EdgeInsets.symmetric(vertical: 5),
         decoration: BoxDecoration(
@@ -29,13 +28,12 @@ class CustomBtnItemMenu extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, color: AppColors.colorWhite),
+                Icon(icon),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(
                   title!,
-                  style: TextStyle(color: AppColors.colorWhite),
                 )
               ],
             ),
