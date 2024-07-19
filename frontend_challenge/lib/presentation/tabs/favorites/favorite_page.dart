@@ -39,7 +39,7 @@ class FavoritePage extends ConsumerWidget {
                   child: GridView.builder(
                     itemCount: localStorage.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: size >= sizeWeb ? 3 : 2,
+                      crossAxisCount: size >= sizeWeb ? 4 : 2,
                       mainAxisSpacing: 2,
                       mainAxisExtent: 250,
                     ),
