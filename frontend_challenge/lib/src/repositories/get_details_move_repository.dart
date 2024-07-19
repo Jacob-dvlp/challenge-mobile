@@ -13,9 +13,7 @@ class GetDetailsMoveRepository implements GetDetailsMoveI {
         route: AppUrlContant.details(id: id),
         headers: HttpHeaderService.headers(),
       );
-      print(
-        response.request,
-      );
+
       if (response.statusCode == HttpStatus.ok) {
         responseModelDetails = responseModelDetailsFromMap(
           response.body,
