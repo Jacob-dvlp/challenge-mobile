@@ -3,9 +3,6 @@ import 'dart:convert';
 ResponseModelDetails responseModelDetailsFromMap(String str) =>
     ResponseModelDetails.fromMap(json.decode(str));
 
-String responseModelDetailsToMap(ResponseModelDetails data) =>
-    json.encode(data.toMap());
-
 class ResponseModelDetails {
   final int? id;
   final String? title;
@@ -95,35 +92,4 @@ class ResponseModelDetails {
         trailer: json["trailer"],
         trailerThumbnail: json["trailer_thumbnail"],
       );
-
-  Map<String, dynamic> toMap() => {
-        "id": id,
-        "title": title,
-        "original_title": originalTitle,
-        "plot_overview": plotOverview,
-        "type": type,
-        "runtime_minutes": runtimeMinutes,
-        "year": year,
-        "end_year": endYear,
-        "release_date":
-            "${releaseDate!.year.toString().padLeft(4, '0')}-${releaseDate!.month.toString().padLeft(2, '0')}-${releaseDate!.day.toString().padLeft(2, '0')}",
-        "imdb_id": imdbId,
-        "tmdb_id": tmdbId,
-        "tmdb_type": tmdbType,
-        "genres": List<dynamic>.from(genres!.map((x) => x)),
-        "genre_names": List<dynamic>.from(genreNames!.map((x) => x)),
-        "user_rating": userRating,
-        "critic_score": criticScore,
-        "us_rating": usRating,
-        "poster": poster,
-        "backdrop": backdrop,
-        "original_language": originalLanguage,
-        "similar_titles": List<dynamic>.from(similarTitles!.map((x) => x)),
-        "networks": List<dynamic>.from(networks!.map((x) => x)),
-        "network_names": List<dynamic>.from(networkNames!.map((x) => x)),
-        "relevance_percentile": relevancePercentile,
-        "popularity_percentile": popularityPercentile,
-        "trailer": trailer,
-        "trailer_thumbnail": trailerThumbnail,
-      };
 }
